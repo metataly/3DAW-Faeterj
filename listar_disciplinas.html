@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Disciplinas</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: black;
+            color: antiquewhite;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        main{
+            display: flex;
+            justify-content: center;
+        }
+        div{
+            width: 60vw;
+            height: 70vh;
+            background-color: antiquewhite;
+            color: black;
+            
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+
+            margin: 10vh;
+        }
+        footer{
+            display: flex;
+            justify-content: space-evenly;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-style: italic;
+        }
+        form{
+            padding: 5vh 0 0;
+            display: flex;
+            flex-direction: column;
+        }
+        input{
+            border-radius: 3px;
+            padding: 0.4rem;
+            margin: 0.2rem;
+        }
+        section{
+            display: flex;
+            justify-content: space-evenly;
+        }
+    </style>
+    
+</head>
+<body>
+    
+    <main>
+        <div>
+            <h1>Listar disciplinas</h1>
+             <form method="get" action="listar_disciplinas.php" >
+                <input type="text" name="disc" placeholder="Nome da disciplina">
+                <input type="text" name="sig" placeholder="Sigla">
+                <input type="text" name="horas" placeholder="Carga horaria">
+                <section>
+                    <input type="radio" name="op" value ="cadastrar" id = "cad" checked>
+                    <label for="cad">Cadastrar</label>
+                    <input type="radio" name="op" value ="listar" id = "list" >
+                    <label for="list">Listar</label>
+                </section>
+                <input type="submit" value="Continuar">
+    
+             </form>
+        </div>
+    </main>
+    <footer>
+        <h4>3DAW - manhã </h4>
+        <h4>Nathaly Pereira Ferreira</h4>
+    </footer>
+</body>
+</html>
