@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excluir disciplina</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: black;
+            color: antiquewhite;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+        main{
+            display: flex;
+            justify-content: center;
+        }
+        div{
+            width: 60vw;
+            height: 70vh;
+            background-color: antiquewhite;
+            color: black;
+            
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+
+            margin: 10vh;
+        }
+        footer{
+            display: flex;
+            justify-content: space-evenly;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-style: italic;
+        }
+        form{
+            padding: 5vh 0 0;
+            display: flex;
+            flex-direction: column;
+        }
+        input{
+            border-radius: 3px;
+            padding: 0.4rem;
+            margin: 0.2rem;
+        }
+
+    </style>
+</head>
+<body>
+    <main>
+        <div>
+            <h1>Excluir disciplina</h1><br>
+            <legend>Digite a sigla da disciplina que deseja listarr</legend>
+            <form action="listarUma.php" method="get">
+                <input type="text" name="sigla" placeholder="Digite a sigla..." required>
+                <input type="submit" value="Listar">
+            </form>
+        </div>
+    </main>
+    <footer>
+        <h4>3DAW - manhã </h4>
+        <h4>Nathaly Pereira Ferreira</h4>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,6 @@
+matematica;mat;1;
+geografia;geo;2;
+historia;hist;3;
+portugues;pt;4;
+quimica;qui;5;
+fisica;fis;6;
