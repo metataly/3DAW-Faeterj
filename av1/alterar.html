@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Alterar</title>
+</head>
+<body>
+    <main>
+        <div>
+            <form action="alterar.php" method="get">
+                <h1>Alterar Pergunta ou Resposta</h1>
+                <label>Alterar Pergunta (opcional)</label>
+                <input type="number" name="numperg" placeholder="Digite o numero da pergunta" required>
+                <input type="text" name="novaP" placeholder="Digite a nova pergunta">
+                <label>Qual alternativa deseja alterar? (opcional)</label>
+                <section>
+                    <input type="radio" name="op" value ="A">
+                    <label>Alternativa A</label>
+                    <input type="radio" name="op" value ="B">
+                    <label >Alternativa B</label>
+                    <input type="radio" name="op" value ="C">
+                    <label>Alternativa C</label>
+                    <input type="radio" name="op" value ="D">
+                    <label >Alternativa D</label>
+                </section>
+                <input type="text" name="novaR" placeholder="Digite a nova resposta">
+                <input type="submit" value="Alterar!">
+            </form>
+        </div>
+    </main>
+    <footer>
+        <h4>3DAW - manhã, AV1 </h4>
+        <h4>Nathaly Pereira Ferreira</h4>
+    </footer>
+</body>
+</html>
