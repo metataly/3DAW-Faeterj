@@ -1,10 +1,6 @@
-
 <?php
 $arquivo = "usuario.txt"; 
-
-if (isset($_GET['excluir'])) {
-
-    $numPergunta = $_GET['numperg'];
+$numPergunta = $_GET['numperg'];
 
     if (file_exists($arquivo)) {
 
@@ -22,5 +18,5 @@ if (isset($_GET['excluir'])) {
     } else {
         echo "Arquivo não encontrado.";
     }
-}
+    echo "<br><br><a href='excluir.html' style ='padding: 20px;'>Voltar</a><a href='opcoes.html'>Página inicial";
 ?>
