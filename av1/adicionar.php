@@ -1,25 +1,33 @@
 <?php
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
-if (($_SERVER["REQUEST_METHOD"] == "GET") && (!file_exists("usuario.txt"))){
 
-    $perg = ($_GET['pergunta']);
-    $numPerg = ($_GET['numperg']);
-    $alterA = ($_GET['alternativaA']);
-    $alterB = ($_GET['alternativaB']);
-    $alterC = ($_GET['alternativaC']);
-    $alterD = ($_GET['alternativaD']);
-    $respCorreta = ($_GET['respostaCorreta']);
+    if (file_exists("usuario.txt")){
 
-    $arquivo = 'usuario.txt';
+        $perg = ($_POST['pergunta']);
+        $numPerg = ($_POST['numperg']);
+        $alterA = ($_POST['respostaA']);
+        $alterB = ($_POST['respostaB']);
+        $alterC = ($_POST['respostaC']);
+        $alterD = ($_POST['respostaD']);
+        $respCorreta = ($_POST['respostaCorreta']);
 
-    $arquivo= fopen ("usuario.txt", "a") or die("erro ao adicionar pergunta");
+        $arquivo = "usuario.txt";
 
-    $linha = $numPerg . ";" . $perg . ";" . $alternA . ";" . $alterB. ";" . $alterC . ";" . $alterD . ";" . $respCorreta "\n";
-    fwrite ($arquivo, $linha);
-    fclose ($arquivo);
+        $arquivo= fopen ("usuario.txt", "a") or die("erro ao adicionar pergunta");
 
-    echo "Dados armazenados com sucesso!";
-} else {
-    echo "Algo deu errado!";
+        $linha = $numPerg . ";" . $perg . ";" . $alterA . ";" . $alterB. ";" . $alterC . ";" . $alterD . ";" . $respCorreta . "\n";
+        
+        fwrite ($arquivo, $linha);
+        fclose ($arquivo);
+
+        echo "Dados armazenados com sucesso!";
+    } else {
+        echo "Algo deu errado!";
+    }
+
+    echo "<br><br>
+    <a href='opcoes.html' style='display:flex; flex-direction: column; align-items: center;'>
+    Página inicial</a>";
 }
 ?>
