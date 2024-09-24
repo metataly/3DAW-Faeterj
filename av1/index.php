@@ -17,5 +17,7 @@ fclose ($arquivo);
 
 echo "$nome cadastrado com sucesso!";
 
-echo "<a href = 'opcoes.html' > Continuar </a>"
+echo "<br><br>
+    <a href='opcoes.html' style='display:flex; flex-direction: column; align-items: center; background-color: rgb(253, 204, 212);'>
+    Continuar</a>";
 ?>
