@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Perguntas e respostas</title>
+
+</head>
+<body>
+    <main>
+        <div>
+            <h1>Adicionar Perguntas e Respostas</h1>
+                <form method="get" action="adicionar.php" >
+                    <label for="pergunta">Numero da Pergunta:</label>
+                    <input type="number" name="numperg" required>
+
+                    <label for="pergunta">Pergunta:</label>
+                    <input type="text" id="perg" name="pergunta" required>
+
+                    <label>Alternativas:</label>
+                    <label for="opcaoA">
+                    <input type="radio" id="opcaoA" name="resposta" value="a" checked>
+                    Opção A: <input type="text" name="alternativaA">
+                    </label>
+                    <label for="opcaoB">
+                    <input type="radio" id="opcaoB" name="resposta" value="b">
+                    Opção B: <input type="text" name="alternativaB" >
+                    </label>
+                    <label for="opcaoC">
+                    <input type="radio" id="opcaoC" name="resposta" value="c">
+                    Opção C: <input type="text" name="alternativaC" >
+                    </label>
+                    <label for="opcaoD">
+                    <input type="radio" id="opcaoD" name="resposta" value="d">
+                    Opção D: <input type="text" name="alternativaD" >
+                    </label>
+
+                    <label for="respostaCorreta">Resposta Correta:</label>
+                    <select id="respostaCorreta" name="respostaCorreta" required>
+                        <option value="">Selecione...</option>
+                        <option value="1">Opção A</option>
+                        <option value="2">Opção B</option>
+                        <option value="3">Opção C</option>
+                        <option value="4">Opção D</option>
+                    </select>
+                    <input type="submit" value="Adicionar">
+                </form>
+        </div>
+    </main>
+
+</body>
+</html>
