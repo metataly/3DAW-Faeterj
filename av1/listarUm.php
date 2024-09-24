@@ -25,6 +25,6 @@ if (file_exists($arquivo)){
     echo "Arquivo não encontrado.";
 }
     echo "<br><br>
-    <a href='opcao.html' style='display:flex; flex-direction: column; align-items: center;'>
+    <a href='opcoes.html' style='display:flex; flex-direction: column; align-items: center;'>
     Página inicial</a>";
 ?>
