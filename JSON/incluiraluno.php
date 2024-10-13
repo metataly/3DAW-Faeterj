@@ -1,7 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
-
     if (file_exists("usuario.txt")){
 
         $perg = ($_POST['pergunta']);
@@ -21,13 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
         fwrite ($arquivo, $linha);
         fclose ($arquivo);
 
-        echo "Dados armazenados com sucesso!";
-    } else {
-        echo "Algo deu errado!";
     }
-
-    echo "<br><br>
-    <a href='opcoes.html' style='display:flex; flex-direction: column; align-items: center;'>
-    Página inicial</a>";
+    if (fwrite($arquivo, $linha)) {
+        echo json_encode(["mensagem" => "Dados armazenados com sucesso!", "status" => "sucesso"]);
+    } else {
+        echo json_encode(["mensagem" => "Erro ao armazenar os dados.", "status" => "erro"]);
+    }
+    
 }
+
 ?>
