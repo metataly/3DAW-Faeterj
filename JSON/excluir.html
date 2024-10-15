@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,27 +17,30 @@
             if (this.readyState == 4 && this.status == 200) {
                 let response = JSON.parse(this.responseText);
 
+                let msgElement = document.getElementById("msg");
                 if (response.status === "sucesso") {
-                    document.getElementById("numperg").value = '';
-                    let msgElement = document.getElementById("msg");
-                    msgElement.innerHTML = response.mensagem;
+                    document.getElementById("numperg").value = ''; // Limpa o campo
+                    msgElement.innerHTML = response.mensagem; // Mensagem de sucesso
+                } else {
+                    msgElement.innerHTML = response.mensagem; // Mensagem de erro
                 }
             } else if (this.readyState < 4) {
                 console.log("Preparando a requisição...");
             } else {
                 console.log("Requisição falhou: " + this.status);
-            };
-            xmlhttp.open("POST", "https://localhost/daw/Crud-Json/excluir.php", true);
-            xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xmlhttp.send("numperg=" + encodeURIComponent(numPergunta));
-        }
+            }
+        };
+
+        xmlhttp.open("POST", "https://localhost/daw/Crud-Json/excluir.php", true);
+        xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xmlhttp.send("numperg=" + encodeURIComponent(numPergunta));
     }
     </script>
 </head>
 <body>
     <main>
         <div>
-            <form method="post" onsubmit= "excluirForm(event)">
+            <form method="post" onsubmit="excluirForm(event)">
                 <h1>Excluir Pergunta</h1>
                 <input type="number" name="numperg" id="numperg" placeholder="Digite o numero da pergunta.." required>
                 <input type="submit" value="Excluir!">
@@ -50,4 +53,4 @@
         <h4>Nathaly Pereira Ferreira</h4>
     </footer>
 </body>
-</html>   
+</html>
