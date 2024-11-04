@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Excluir</title>
+    <script>
+    function excluirForm(event) {
+        event.preventDefault();
+
+        let numPergunta = document.getElementById("numperg").value;
+    
+        // Requisição por XMLHttpRequest
+        let xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let response = JSON.parse(this.responseText);
+
+                let msgElement = document.getElementById("msg");
+                if (response.status === "sucesso") {
+                    document.getElementById("numperg").value = ''; // Limpa o campo
+                    msgElement.innerHTML = response.mensagem; // Mensagem de sucesso
+                } else {
+                    msgElement.innerHTML = response.mensagem; // Mensagem de erro
+                }
+            } else if (this.readyState < 4) {
+                console.log("Preparando a requisição...");
+            } else {
+                console.log("Requisição falhou: " + this.status);
+            }
+        };
+
+        xmlhttp.open("POST", "https://localhost/daw/Crud-Json/excluir.php", true);
+        xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xmlhttp.send("numperg=" + encodeURIComponent(numPergunta));
+    }
+    </script>
+</head>
+<body>
+    <main>
+        <div>
+            <form method="post" onsubmit="excluirForm(event)">
+                <h1>Excluir Pergunta</h1>
+                <input type="number" name="numperg" id="numperg" placeholder="Digite o numero da pergunta.." required>
+                <input type="submit" value="Excluir!">
+                <p id="msg" style="color:  #5336b9;"></p>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <h4>3DAW - manhã, AV1 </h4>
+        <h4>Nathaly Pereira Ferreira</h4>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Listar Um</title>
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            color: black;
+            background: pink;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+<script>
+    function listarUm(event) {
+        event.preventDefault();
+
+        let numPergunta = document.getElementById("numperg").value;
+
+        // Requisição por XMLHttpRequest
+        let xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    let resposta = JSON.parse(this.responseText);
+                    let msgElement = document.getElementById("listapergunta");
+                    msgElement.innerHTML = "";
+
+                    if (resposta.linha) {
+                        let li = document.createElement("li");
+                        li.textContent = resposta.linha;
+                        msgElement.appendChild(li);
+                    } else if (resposta.erro) {
+                        msgElement.innerHTML = resposta.erro;
+                    }
+                } else {
+                    console.log("Requisição falhou: " + this.status);
+                }
+            }
+        };
+
+        xmlhttp.open("GET", "https://localhost/daw/Crud-Json/listarUm.php?numperg=" + encodeURIComponent(numPergunta), true);
+        xmlhttp.send();
+    }
+</script>
+
+</head>
+<body>
+    <main>
+        <div>
+            <form method="get" onsubmit="listarUm(event)">
+                <h1>Listar uma Pergunta</h1>
+                <input type="number" name="numperg" id="numperg" placeholder="Digite o número da pergunta" required>
+                <input type="submit" value="Ver">
+                <p id="listapergunta" style="color: #5336b9;"></p>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <h4>3DAW - manhã, AV1 </h4>
+        <h4>Nathaly Pereira Ferreira</h4>
+    </footer>
+</body>
+</html>
