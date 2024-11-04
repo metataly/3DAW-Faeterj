@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Adicionar</title>
+
+    <script>
+        function adicionarPerg(event){
+            console.log("função");
+           event.preventDefault();
+
+           // objeto JavaScript que facilita a construção de um conjunto de pares chave-valor representando os campos de um formulário.
+           let formData = new FormData();
+            formData.append("pergunta", document.getElementById("pergunta").value);
+            formData.append("respostaA", document.getElementById("respostaA").value);
+            formData.append("respostaB", document.getElementById("respostaB").value);
+            formData.append("respostaC", document.getElementById("respostaC").value);
+            formData.append("respostaD", document.getElementById("respostaD").value);
+            formData.append("respostaCorreta", document.getElementById("respostaCorreta").value);
+            console.log(pergunta, respostaA, respostaB, respostaC, respostaD, respostaCorreta);
+
+            //requisição por XMLHttpRequest;
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+
+                if (this.readyState == 4 && this.status == 200) {
+                    let response = JSON.parse(this.responseText);
+                   
+                    if (response.status === "sucesso"){
+                        document.getElementById("pergunta").value = '';
+                        document.getElementById("respostaA").value = '';
+                        document.getElementById("respostaB").value = '';
+                        document.getElementById("respostaC").value = '';
+                        document.getElementById("respostaD").value = '';
+                        document.getElementById("respostaCorreta").value = '';
+                        let msgElement = document.getElementById("msg");
+                        msgElement.innerText = response.mensagem;
+                    }
+                } 
+                else if (this.readyState < 4) {
+                    console.log("Preparando a requisição...");
+                } 
+                else {
+                    console.log("Requisição falhou: " + this.status);
+                }
+            };
+            xmlhttp.open("POST", "http://localhost/daw/JSON_SQL/adicionar.php", true);
+            xmlhttp.send(formData); //enviando o formulario
+        }
+    </script>
+</head>
+<body>
+    <main>
+        <div>
+            <form method="post" onsubmit="adicionarPerg(event)">
+
+                <label for="pergunta">Pergunta:</label>
+                <input type="text" id="pergunta" name="pergunta" required>
+
+                <label>Alternativas:</label>
+                <label>Opção A:</label>
+                <input type="text" id="respostaA" name="respostaA" required>
+                <label>Opção B:</label>
+                <input type="text" id="respostaB" name="respostaB" required>
+                <label>Opção C:</label>
+                <input type="text" id="respostaC" name="respostaC" required>
+                <label>Opção D:</label>
+                <input type="text" id="respostaD" name="respostaD" required>
+
+                <label>Resposta Correta:</label>
+                <select id="respostaCorreta" name="respostaCorreta" required>
+                    <option value="">Selecione...</option>
+                    <option value="a">Opção A</option>
+                    <option value="b">Opção B</option>
+                    <option value="c">Opção C</option>
+                    <option value="d">Opção D</option>
+                </select>
+                <input type="submit" value="Adicionar">
+                <p id="msg" style="color:rgb(83, 54, 185);"></p>
+            </form>
+           
+        </div>
+    </main>
+    <footer>
+        <h4>3DAW - manhã, AV1 </h4>
+        <h4>Nathaly Pereira Ferreira</h4>
+    </footer>
+</body>
+</html>

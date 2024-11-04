@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Alterar</title>
+    <script>
+        function editarForm(event) {
+        event.preventDefault();
+
+        let numPergunta = document.getElementById("numperg").value;
+        let novaPergunta = document.getElementById("novaP").value;
+        let novaResposta = document.getElementById("novaR").value;
+
+        // Verificando qual opção foi selecionada
+        let op = document.querySelector('input[name="op"]:checked');
+        if (op) {
+            op = op.value;
+        } else {
+            op = ''; // Caso nenhuma opção seja selecionada
+        }
+
+        // Requisição por XMLHttpRequest
+        let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let response = JSON.parse(this.responseText);
+
+                if (response.status === "sucesso") {
+                    document.getElementById("numperg").value = '';
+                    document.getElementById("novaP").value = '';
+                    document.getElementById("novaR").value = '';
+                    document.querySelectorAll('input[name="op"]').forEach(radio => radio.checked = false);
+                    let msgElement = document.getElementById("msg");
+                    msgElement.innerText = response.mensagem;
+                }
+                else{
+                    let msgElement = document.getElementById("msg");
+                    msgElement.innerText = response.mensagem;
+                }
+            } else if (this.readyState < 4) {
+                console.log("Preparando a requisição...");
+            } else {
+                console.log("Requisição falhou: " + this.status);
+            }
+        };
+        xmlhttp.open("POST", "http://localhost/daw/JSON_SQL/alterar.php", true);
+        xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xmlhttp.send("numperg=" + encodeURIComponent(numPergunta) + "&novaP=" + encodeURIComponent(novaPergunta) + "&novaR=" + encodeURIComponent(novaResposta) + "&op=" + encodeURIComponent(op));
+    }
+
+    </script>
+</head>
+<body>
+    <main>
+        <div>
+            <form method="post" onsubmit="editarForm(event)">
+                <h1>Alterar Pergunta ou Resposta</h1>
+                <label>Alterar Pergunta (opcional)</label>
+                <input type="number" name="numperg" id= "numperg" placeholder="Digite o numero da pergunta" required>
+                <input type="text" name="novaP" id="novaP" placeholder="Digite a nova pergunta">
+                <label>Qual alternativa deseja alterar? (opcional)</label>
+                <section id="op">
+                    <input type="radio" name="op" value ="A">
+                    <label>Alternativa A</label>
+                    <input type="radio" name="op"  value ="B">
+                    <label >Alternativa B</label>
+                    <input type="radio" name="op"  value ="C">
+                    <label>Alternativa C</label>
+                    <input type="radio" name="op"  value ="D">
+                    <label >Alternativa D</label>
+                </section>
+                <input type="text" name="novaR" id="novaR" placeholder="Digite a nova resposta">
+                <input type="submit" value="Alterar!">
+                <p id ="msg" style="color: #5336b9;"></p>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <h4>3DAW - manhã, AV1 </h4>
+        <h4>Nathaly Pereira Ferreira</h4>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Perguntas</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            color: black;
+            background: pink;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+   <script>
+    function listarPerguntas() {
+        let xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    try {
+                        let perguntas = JSON.parse(this.responseText);
+                        let lista = document.getElementById("listaPerguntas");
+    
+                        perguntas.forEach((pergunta, i) => {
+                            let li = document.createElement("li");
+                            li.textContent = `Pergunta ${pergunta.numero_pergunta}: ${pergunta.pergunta} | A: ${pergunta.resposta_a} | B: ${pergunta.resposta_b} | C: ${pergunta.resposta_c} | D: ${pergunta.resposta_d} | Correta: ${pergunta.resposta_correta}`;
+                            lista.appendChild(li);
+                        });
+                    } catch (e) {
+                        console.error("Erro ao analisar JSON: " + e);
+                    }
+                } else {
+                    console.error("Erro na requisição: " + this.status);
+                }
+            }
+        };
+        xmlhttp.open("GET", "http://localhost/daw/JSON_SQL/listarTodos.php", true);
+        xmlhttp.send();
+    }
+    
+    // Chama a função ao carregar a página
+    window.onload = listarPerguntas;
+    </script>
+    
+</head>
+<body>
+    <h1>Lista de Perguntas</h1>
+    <ul id="listaPerguntas"></ul>
+</body>
+</html>
