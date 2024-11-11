@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../JSON_SQL/style.css">
+    <title>Cadastrar usuário</title>
+    <script>
+        function enviarFormulario(event) {
+            event.preventDefault();
+
+            let nome = document.getElementById("nome").value;
+            let email = document.getElementById("email").value;
+            let senha = document.getElementById("senha").value;
+
+            if (!nome || !email || !senha) {
+                document.getElementById("msg").innerText = "Todos os campos são obrigatórios!";
+                return;
+            }
+
+            // Verificando formato de email
+            let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById("msg").innerText = "Insira um email válido!";
+                return;
+            }
+
+            // Verificando senha (mínimo de 6 caracteres)
+            if (senha.length < 6) {
+                document.getElementById("msg").innerText = "A senha deve ter pelo menos 6 caracteres!";
+                return;
+            }
+
+            // Requisição AJAX
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    let response = JSON.parse(this.responseText);
+                    if (response.status === "sucesso") {
+                        // Limpar campos e mostrar mensagem de sucesso
+                        document.getElementById("nome").value = '';
+                        document.getElementById("email").value = '';
+                        document.getElementById("senha").value = '';
+                        document.getElementById("msg").innerText = response.mensagem;
+
+                        // Mostrar link para continuar
+                        document.getElementById("cont").style.display = 'block';
+                    } else {
+                        document.getElementById("msg").innerText = response.mensagem;
+                    }
+                }
+            };
+            xmlhttp.open("POST", "http://localhost/daw/JSON_SQL/index.php", true);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send("nome=" + encodeURIComponent(nome) + "&email=" + encodeURIComponent(email) + "&senha=" + encodeURIComponent(senha));
+        }
+    </script>
+</head>
+<body>
+    <main>
+        <div>
+            <form method="post" onsubmit="enviarFormulario(event)">
+                <h1>Cadastrar Usuário</h1>
+                <legend>Insira seu nome</legend>
+                <input type="text" id="nome" name="nome" placeholder="Nome" required>
+                <legend>Insira seu email</legend>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <legend>Insira sua senha</legend>
+                <input type="password" id="senha" name="senha" placeholder="Senha" required>
+                <input type="submit" value="Cadastrar">
+                <h6 id="msg" style="color: rgb(83, 54, 185);"></h6>
+                <a href="opcoes.html" id="cont" style="display: none; padding: 1vh; text-align: center;">Continuar</a>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <h4>3DAW - manhã, AV1 </h4>
+        <h4>Nathaly Pereira Ferreira</h4>
+    </footer>
+</body>
+</html>
